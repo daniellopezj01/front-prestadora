@@ -1,0 +1,98 @@
+<div [ngClass]="{'hidden-menu':(!menu.visible)}" class="menu-show">
+  <div class=" justify-content-center align-items-center body d-flex " id="menu">
+    <div
+      #actionTask
+      (click)="action($event.target, 'task')"
+      class="unit col-2 text-center activation width_max">
+      <span style=" display:inline-block;">
+        <div *ngIf="containerClass(0); then show; else hide"></div>
+        <ng-template #show>
+          <img
+            data-src="{{ taskActive }}"
+            class="img_menu lazyload img-fluid"
+          />
+        </ng-template>
+        <ng-template #hide>
+          <img data-src="{{ taskIcon }}" class="img_menu lazyload img-fluid" />
+        </ng-template>
+        Task
+      </span>
+    </div>
+    <div
+      (click)="action($event.target, 'menu')"
+      class="unit col-2 text-center width_max"
+      #actionMenu
+    >
+      <span style=" display:inline-block;">
+        <div *ngIf="containerClass(1); then showMenu; else hideMenu"></div>
+        <ng-template #showMenu>
+          <img
+            data-src="{{ menuActive }}"
+            class="img_menu lazyload img-fluid"
+          />
+        </ng-template>
+        <ng-template #hideMenu>
+          <img data-src="{{ menuIcon }}" class="img_menu lazyload img-fluid" />
+        </ng-template>
+        Menu
+      </span>
+    </div>
+    <div
+      (click)="add()"
+      class=" col-4 text-center width_max addButton"
+      #actionCreate
+    >
+      <span (click)="add()" class="spanContainer">
+        <img
+          name="actionCreate"
+          data-src="{{ addButton }}"
+          class="lazyload  img-fluid"
+          alt="Responsive image"
+        />
+      </span>
+    </div>
+    <div
+      (click)="action($event.target, 'favorite')"
+      class=" unit col-2 text-center width_max"
+      #actionFavorite
+    >
+      <span style=" display:inline-block;">
+        <div
+          *ngIf="containerClass(2); then showFavorite; else hideFavorite"
+        ></div>
+        <ng-template #showFavorite>
+          <img
+            data-src=" {{ quickActive }}"
+            class="img_menu lazyload img-fluid"
+          />
+        </ng-template>
+        <ng-template #hideFavorite>
+          <img data-src="{{ quickIcon }}" class="img_menu lazyload img-fluid" />
+        </ng-template>
+        Favorite
+      </span>
+    </div>
+    <div
+      (click)="action($event.target, 'profile')"
+      class="unit col-2 text-center width_max"
+      #actionProfile
+    >
+      <span style=" display:inline-block; ">
+        <div *ngIf="containerClass(3); then showUser; else hideUser"></div>
+        <ng-template #showUser>
+          <img
+            data-src="{{ profileActive }}"
+            class="img_menu lazyload img-fluid"
+          />
+        </ng-template>
+        <ng-template #hideUser>
+          <img
+            data-src="{{ profileIcon }}"
+            class="img_menu lazyload img-fluid"
+          />
+        </ng-template>
+        Profile
+      </span>
+    </div>
+  </div>
+</div>

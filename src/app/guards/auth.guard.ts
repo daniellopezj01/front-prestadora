@@ -11,8 +11,6 @@ import {
 } from "@angular/router";
 import { Observable } from "rxjs";
 
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-
 @Injectable({
   providedIn: "root",
 })
@@ -20,13 +18,13 @@ export class AuthGuard implements CanLoad {
   fromSearch = false;
   showConfirm = false;
   constructor(
-    private modalService: BsModalService,
+
     private router: Router,
     private RestService: RestService
   ) {}
 
   closeCb: boolean = false;
-  modalRef: BsModalRef;
+
   config = {
     ignoreBackdropClick: false,
     keyboard: false,

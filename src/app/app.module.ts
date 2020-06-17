@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ToastrModule } from "ngx-toastr";
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -13,9 +15,17 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ToastrModule.forRoot({
+      timeOut: 350000,
+      positionClass: "toast-top-right",
+      preventDuplicates: true,
+    }),
   ],
-  providers: [],
+  
+
+  providers: [ CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,35 @@
+<div [ngClass]="{'hidden-menu':(!menu.visible)}" class="menu-show">
+    <div class=" justify-content-center align-items-center body d-flex " id="menu">
+        <div #actionOne (click)="action(0)" class="unit w-20 text-center activation width_max">
+            <span class="span-menu">
+         <fa-icon class="icon-style" [ngStyle]="{'color': containerClass(0)?'#1C7EE0':'gray'}"[icon]="faHome"></fa-icon>
+        <p [ngStyle]="{'color': containerClass(0)?'#1C7EE0':'gray'}"> Inicio </p>
+        </span>
+        </div>
+        <div #actionTwo (click)="action(1)" class="unit w-20 text-center width_max">
+            <span class="span-menu">
+          <fa-icon class="icon-style" [ngStyle]="{'color': containerClass(1)?'#1C7EE0':'gray'}"[icon]="faCommentsDollar"></fa-icon>
+        <p [ngStyle]="{'color': containerClass(1)?'#1C7EE0':'gray'}"> Finanzas </p>
+      </span>
+        </div>
+        <div #actionThree (click)="action(2)" class="unit w-20 text-center width_max">
+            <span class="span-menu">
+          <fa-icon class="icon-style" [ngStyle]="{'color': containerClass(2)?'#1C7EE0':'gray'}"[icon]="faUserFriends"></fa-icon>
+        <p [ngStyle]="{'color': containerClass(2)?'#1C7EE0':'gray'}"> Clientes </p>
+      </span>
+        </div>
+        <div #actionFour (click)="action(3)" class=" unit w-20 text-center width_max">
+            <span class="span-menu">
+              <fa-icon class="icon-style" [ngStyle]="{'color': containerClass(3)?'#1C7EE0':'gray'}"[icon]="faUserEdit"></fa-icon>
+              
+              <p [ngStyle]="{'color': containerClass(3)?'#1C7EE0':'gray'}"> Registrar </p>
+            </span>
+        </div>
+        <div #actionFive (click)="action(4)" class="unit remove-border w-20 text-center width_max">
+            <span class="span-menu">
+              <fa-icon class="icon-style" [ngStyle]="{'color': containerClass(4)?'#1C7EE0':'gray'}"[icon]="faUser"></fa-icon>
+        <p [ngStyle]="{'color': containerClass(4)?'#1C7EE0':'gray'}"> Perfil </p>
+      </span>
+        </div>
+    </div>
+</div>

@@ -10,13 +10,13 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        redirectTo: "auth",
+        redirectTo: "home",
         pathMatch: "full"
       },
       {
-        path: "auth",
+        path: "home",
         loadChildren: () =>
-          import("../auth/auth.module").then(m => m.AuthModule)
+          import("../loan/loan.module").then(m => m.LoanModule)
       },
       {
         path: "user",

@@ -7,7 +7,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ToastrModule } from "ngx-toastr";
 import { CookieService } from "ngx-cookie-service";
-
+import { MenuModule } from './modules/menu/menu.module';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 @NgModule({
   declarations: [
     AppComponent
@@ -16,12 +17,14 @@ import { CookieService } from "ngx-cookie-service";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MenuModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ToastrModule.forRoot({
       timeOut: 350000,
       positionClass: "toast-top-right",
       preventDuplicates: true,
     }),
+    FontAwesomeModule
   ],
   
 

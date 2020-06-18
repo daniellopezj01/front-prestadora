@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import { ToastrModule } from "ngx-toastr";
 import { CookieService } from "ngx-cookie-service";
 import { MenuModule } from './modules/menu/menu.module';
-
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 @NgModule({
   declarations: [
     AppComponent
@@ -24,6 +24,7 @@ import { MenuModule } from './modules/menu/menu.module';
       positionClass: "toast-top-right",
       preventDuplicates: true,
     }),
+    FontAwesomeModule
   ],
   
 

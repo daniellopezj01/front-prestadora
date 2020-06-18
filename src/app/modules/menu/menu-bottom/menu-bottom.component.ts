@@ -3,87 +3,95 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  ChangeDetectorRef
+  ChangeDetectorRef,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { MenuBottomService } from "./menu-bottom.service";
-
+import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import {
+  faUserFriends,
+  faUserCog,
+  faUserTie,
+  faHome,
+  faCommentsDollar,
+  faUserEdit,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
 @Component({
   selector: "app-menu-bottom",
   templateUrl: "./menu-bottom.component.html",
-  styleUrls: ["./menu-bottom.component.css"]
+  styleUrls: ["./menu-bottom.component.css"],
 })
 export class MenuBottomComponent implements OnInit {
-  @ViewChild("actionTask") actionTask: ElementRef;
-  @ViewChild("actionMenu") actionMenu: ElementRef;
-  @ViewChild("actionCreate") actionCreate: ElementRef;
-  @ViewChild("actionFavorite") actionFavorite: ElementRef;
-  @ViewChild("actionProfile") actionProfile: ElementRef;
+  @ViewChild("actionOne") actionOne: ElementRef;
+  @ViewChild("actionTwo") actionTwo: ElementRef;
+  @ViewChild("actionThree") actionThree: ElementRef;
+  @ViewChild("actionFour") actionFour: ElementRef;
+  @ViewChild("actionFive") actionFive: ElementRef;
 
   arrayElements: any = [];
   message: string;
+  actual: number = 0;
+  faUserFriends = faUserFriends;
+  faHome = faHome;
+  faCommentsDollar = faCommentsDollar;
+  faUserEdit = faUserEdit;
+  faUser = faUser;
 
-  // Set icons
-  taskIcon: string = "../../../../../assets/buttonMenu/myTask.svg";
-  taskActive: string = "../../../../../assets/buttonMenu/myTaskActive.svg";
-  menuIcon: string = "../../../../../assets/buttonMenu/menu.svg";
-  menuActive: string = "../../../../../assets/buttonMenu/menuActive.svg";
-  quickIcon: string = "../../../../../assets/buttonMenu/quick.svg";
-  quickActive: string = "../../../../../assets/buttonMenu/quickActive.svg";
-  profileIcon: string = "../../../../../assets/buttonMenu/profile.svg";
-  profileActive: string = "../../../../../assets/buttonMenu/profileActive.svg";
   addButton: string = "../../../../../assets/buttonMenu/addButton.svg";
   constructor(
     private router: Router,
     public menu: MenuBottomService,
-    private cdRef: ChangeDetectorRef
-  ) {}
+    private cdRef: ChangeDetectorRef,
+    private library: FaIconLibrary
+  ) {
+    library.addIcons(faUserFriends, faCommentsDollar,faUserEdit,faHome,faUser);
+  }
 
   ngOnInit(): void {
-    this.menu.position.subscribe(res => {
+    this.menu.position.subscribe((res) => {
       this.changeActivationFromSideBar(res);
     });
-
   }
 
   ngAfterViewInit(): void {
+    if (this.arrayElements.includes(undefined)) {
+      console.log("paila");
+    }
     this.arrayElements = [
-      this.actionTask,
-      this.actionMenu,
-      this.actionFavorite,
-      this.actionProfile
+      this.actionOne,
+      this.actionTwo,
+      this.actionThree,
+      this.actionFour,
+      this.actionFive,
     ];
+
     this.cdRef.detectChanges();
   }
 
-  action(event, name) {
-    this.arrayElements.forEach(element => {
-      if (
-        event === element.nativeElement ||
-        event === element.nativeElement.children[0] ||
-        event === element.nativeElement.children[0].children[0]
-      ) {
-        this.addClass(element);
-        switch (name) {
-          case "task":
-            this.router.navigate(["/home"]);
-            break;
-          case "menu":
-            this.router.navigate(["/home/task/projects"]);
-            break;
-          case "favorite":
-            this.router.navigate(["/home/task/quick"]);
-            break;
-          case "profile":
-            this.router.navigate(["/home/user"]);
-            break;
-          default:
-            break;
-        }
-      } else {
-        this.removeClass(element);
-      }
-    });
+  action(position) {
+    this.removeClass(this.arrayElements[this.actual]);
+    this.addClass(this.arrayElements[position]);
+    this.actual = position;
+    switch (name) {
+      case 0:
+        this.router.navigate(["/home"]);
+        break;
+      case 1:
+        this.router.navigate(["/home/task/projects"]);
+        break;
+      case 2:
+        this.router.navigate(["/home/task/projects"]);
+        break;
+      case 3:
+        this.router.navigate(["/home/task/quick"]);
+        break;
+      case 4:
+        this.router.navigate(["/home/user"]);
+        break;
+      default:
+        break;
+    }
   }
 
   addClass(button: ElementRef) {
@@ -107,7 +115,7 @@ export class MenuBottomComponent implements OnInit {
   }
 
   add() {
-    this.arrayElements.forEach(element => {
+    this.arrayElements.forEach((element) => {
       this.removeClass(element);
     });
     this.router.navigate(["/home/task/add"]);
@@ -118,7 +126,7 @@ export class MenuBottomComponent implements OnInit {
       this.arrayElements[position] !== undefined &&
       this.arrayElements.length > 0
     ) {
-      this.arrayElements.forEach(element => {
+      this.arrayElements.forEach((element) => {
         this.removeClass(element);
       });
       this.arrayElements[position].nativeElement.classList.add("activation");

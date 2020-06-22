@@ -13,7 +13,7 @@ export class SharedService {
   ) {}
   showSuccess(title = "", message = "") {
     this.toastr.success(message, title, {
-      timeOut: 3000,
+      timeOut: 300000,
       titleClass: "titleSuccess",
       messageClass: "messageSuccess",
       toastClass: "containsSuccess",
@@ -22,7 +22,7 @@ export class SharedService {
 
   showError(title = "", message = "") {
     this.toastr.error(message, title, {
-      timeOut: 3000,
+      timeOut: 300000,
       titleClass: "titleError",
       messageClass: "messageError",
       toastClass: "containsError",

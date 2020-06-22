@@ -1,25 +1,31 @@
 <div class="body">
     <div class="col-12  imageTravel">
-        <img data-src="../../assets/Logo.svg" class=" lazyload img-fluid" alt="Responsive image">
+        <img src="../../../../../assets/logo.png" class="lazyload img-fluid" alt="Logo">
+        <div class="title-logo d-flex justify-content-center">
+            <p>Multiservicios Hillary</p>
+        </div>
+
     </div>
+
     <div class="col-12 " id="containerForm">
         <div id="managerForm">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group inputWithIcon">
-                    <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" formControlName="emailLogin" class="form-control" [(ngModel)]="login.email" [ngClass]="{ 'is-invalid': submitted && f.emailLogin.errors }" />
                     <fa-icon class="icon-style lazyload" [icon]="faEnvelope"></fa-icon>
-                    <div *ngIf="submitted && f.emailLogin.errors" class="invalid-feedback">
-                        <div *ngIf="f.emailLogin.errors.required">
+                    <input id="username" type="text" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">
                             <p class="textP">Correo requerido</p>
                         </div>
-                        <div *ngIf="f.emailLogin.errors?.email">
+                        <div *ngIf="f.email.errors?.email">
                             <p class="textP"> ejemplo@ejemplo.com </p>
                         </div>
                     </div>
                 </div>
                 <div class="form-group inputWithIcon">
                     <fa-icon class="icon-style lazyload" [icon]="faUnlockAlt"></fa-icon>
-                    <input type="password" placeholder="Password" formControlName="password" class="form-control" [(ngModel)]="login.password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <input type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">
                             <p class="textP">password requerido</p>
@@ -31,7 +37,7 @@
                 </div>
 
                 <div>
-                    <button #buttonLogin [LoadingbuttonDirective]="loading" [innerHTML]="'Ingresar'" [label]="'Cargando'" class="btn btn-primary animated">Ingresar</button>
+                    <button #buttonLogin [LoadingbuttonDirective]="loading" [disabled]="loading" [innerHTML]="'Ingresar'" [label]="'Cargando'" class="btn btn-primary animated">Ingresar</button>
                 </div>
             </form>
         </div>

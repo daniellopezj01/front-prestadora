@@ -9,6 +9,7 @@ import { ToastrModule } from "ngx-toastr";
 import { CookieService } from "ngx-cookie-service";
 import { MenuModule } from './modules/menu/menu.module';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { SharedModule } from './modules/shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,10 +25,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
       positionClass: "toast-top-right",
       preventDuplicates: true,
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule
   ],
-  
-
   providers: [ CookieService],
   bootstrap: [AppComponent]
 })

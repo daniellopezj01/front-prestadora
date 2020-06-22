@@ -5,15 +5,16 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { MenuModule } from '../menu/menu.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     MenuModule,
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule
   ]
 })
 export class HomeModule { }

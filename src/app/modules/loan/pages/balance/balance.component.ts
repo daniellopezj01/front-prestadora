@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-balance',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BalanceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private   coockies: CookieService,private router:Router) { }
 
   ngOnInit(): void {
   }
-
+  logOut(){
+    this.coockies.deleteAll("/");
+    this.router.navigate(["/auth/login"]);
+  }
 }

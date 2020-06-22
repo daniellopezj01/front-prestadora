@@ -9,6 +9,9 @@ import { ToastrModule } from "ngx-toastr";
 import { CookieService } from "ngx-cookie-service";
 import { MenuModule } from './modules/menu/menu.module';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { SharedModule } from './modules/shared/shared.module';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent
@@ -18,16 +21,17 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     AppRoutingModule,
     HttpClientModule,
     MenuModule,
+    CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ToastrModule.forRoot({
       timeOut: 350000,
       positionClass: "toast-top-right",
       preventDuplicates: true,
     }),
-    FontAwesomeModule
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    SharedModule
   ],
-  
-
   providers: [ CookieService],
   bootstrap: [AppComponent]
 })

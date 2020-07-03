@@ -73,7 +73,7 @@ export class MenuBottomComponent implements OnInit {
     this.removeClass(this.arrayElements[this.actual]);
     this.addClass(this.arrayElements[position]);
     this.actual = position;
-    switch (name) {
+    switch (position) {
       case 0:
         this.router.navigate(["/home"]);
         break;
@@ -84,7 +84,8 @@ export class MenuBottomComponent implements OnInit {
         this.router.navigate(["/home/task/projects"]);
         break;
       case 3:
-        this.router.navigate(["/home/task/quick"]);
+        console.log("3")
+        this.router.navigate(["/home/register"]);
         break;
       case 4:
         this.router.navigate(["/home/user"]);

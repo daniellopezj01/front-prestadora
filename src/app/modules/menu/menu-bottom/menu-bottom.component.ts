@@ -15,7 +15,7 @@ import {
   faHome,
   faCommentsDollar,
   faUserEdit,
-  faUser
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 @Component({
   selector: "app-menu-bottom",
@@ -23,13 +23,6 @@ import {
   styleUrls: ["./menu-bottom.component.css"],
 })
 export class MenuBottomComponent implements OnInit {
-  @ViewChild("actionOne") actionOne: ElementRef;
-  @ViewChild("actionTwo") actionTwo: ElementRef;
-  @ViewChild("actionThree") actionThree: ElementRef;
-  @ViewChild("actionFour") actionFour: ElementRef;
-  @ViewChild("actionFive") actionFive: ElementRef;
-
-  arrayElements: any = [];
   message: string;
   actual: number = 0;
   faUserFriends = faUserFriends;
@@ -45,35 +38,26 @@ export class MenuBottomComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private library: FaIconLibrary
   ) {
-    library.addIcons(faUserFriends, faCommentsDollar,faUserEdit,faHome,faUser);
+    library.addIcons(
+      faUserFriends,
+      faCommentsDollar,
+      faUserEdit,
+      faHome,
+      faUser
+    );
   }
 
-  ngOnInit(): void {
-    this.menu.position.subscribe((res) => {
-      this.changeActivationFromSideBar(res);
-    });
-  }
+  ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
-    if (this.arrayElements.includes(undefined)) {
-      console.log("paila");
-    }
-    this.arrayElements = [
-      this.actionOne,
-      this.actionTwo,
-      this.actionThree,
-      this.actionFour,
-      this.actionFive,
-    ];
 
+  ngAfterViewChecked(): void {
+    this.actual = this.menu.getPosition();
     this.cdRef.detectChanges();
   }
 
   action(position) {
-    this.removeClass(this.arrayElements[this.actual]);
-    this.addClass(this.arrayElements[position]);
-    this.actual = position;
-    switch (name) {
+    this.menu.setPosition(position);
+    switch (position) {
       case 0:
         this.router.navigate(["/home"]);
         break;
@@ -84,52 +68,13 @@ export class MenuBottomComponent implements OnInit {
         this.router.navigate(["/home/task/projects"]);
         break;
       case 3:
-        this.router.navigate(["/home/task/quick"]);
+        this.router.navigate(["/home/register"]);
         break;
       case 4:
         this.router.navigate(["/home/user"]);
         break;
       default:
         break;
-    }
-  }
-
-  addClass(button: ElementRef) {
-    button.nativeElement.classList.add("activation");
-  }
-
-  removeClass(button: ElementRef) {
-    button.nativeElement.classList.remove("activation");
-  }
-
-  containerClass(position) {
-    if (
-      this.arrayElements[position] !== undefined &&
-      this.arrayElements.length > 0
-    ) {
-      return this.arrayElements[position].nativeElement.classList.contains(
-        "activation"
-      );
-    }
-    return false;
-  }
-
-  add() {
-    this.arrayElements.forEach((element) => {
-      this.removeClass(element);
-    });
-    this.router.navigate(["/home/task/add"]);
-  }
-
-  changeActivationFromSideBar(position: number) {
-    if (
-      this.arrayElements[position] !== undefined &&
-      this.arrayElements.length > 0
-    ) {
-      this.arrayElements.forEach((element) => {
-        this.removeClass(element);
-      });
-      this.arrayElements[position].nativeElement.classList.add("activation");
     }
   }
 }

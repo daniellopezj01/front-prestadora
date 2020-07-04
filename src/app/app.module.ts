@@ -12,6 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent
@@ -30,7 +31,9 @@ import { CommonModule } from '@angular/common';
     }),
     BrowserAnimationsModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [ CookieService],
   bootstrap: [AppComponent]

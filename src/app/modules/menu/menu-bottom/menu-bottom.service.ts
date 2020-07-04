@@ -1,19 +1,22 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class MenuBottomService {
   visible: boolean = true;
-  public position = new BehaviorSubject(0);
+  public position = 0;
 
   constructor() {
     this.visible = true;
   }
 
-  changePositionClass(position: number) {
-    this.position.next(position);
+  setPosition(position) {
+    this.position = position;
+  }
+  getPosition() {
+    return this.position;
   }
 
   hide() {

@@ -1,1 +1,101 @@
-<p>register works!</p>
+<div *ngIf="registerService.getshowInfo() ; then show else loading"> </div>
+<ng-template #show>
+
+    <div class="body containerPrincipal">
+        <div class="header">
+            <p>Registrar Cliente</p>
+        </div>
+        <div class="principal-container">
+            <div>
+                <div class="line"></div>
+                <div class="navigation d-flex">
+                    <div class="buttons" *ngFor="let item of registerService.navigate; let i=index">
+                        <button [disabled]="!registerService.navigate[i]" (click)="goToSection(i)" class="btn btn-primary">{{i+1}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="switchmanager">
+                <span [ngSwitch]="registerService.active">
+                        <p *ngSwitchCase="0">
+                        <ng-container *ngTemplateOutlet="template0"></ng-container>
+                        </p>
+                        <!-- <p *ngSwitchCase="1">
+                            <ng-container *ngTemplateOutlet="template1"></ng-container>
+                        </p>
+                        <p *ngSwitchCase="2">
+                            <ng-container *ngTemplateOutlet="template2"></ng-container>
+                        </p>
+                        <p *ngSwitchCase="3">
+                            <ng-container *ngTemplateOutlet="template3"></ng-container>
+                        </p>
+                        <p *ngSwitchCase="4">
+                            <ng-container *ngTemplateOutlet="payTemplate"></ng-container>
+                        </p> -->
+                </span>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #loading>
+    <div class="classLoading">
+    </div>
+</ng-template>
+<ng-template #template0>
+    <div class="title-form">
+        <p>traveler Data</p>
+    </div>
+    <form [formGroup]="formOne" (ngSubmit)="activeForms()">
+        <div class="form-group inputWithIcon">
+            <img data-src="../../assets/icon-person.svg" class=" lazyload img-fluid">
+            <input type="text" placeholder="Nombre" formControlName="name" class="form-control" [(ngModel)]="register.name" [ngClass]="{ 'is-invalid':isInValidate(f1.name,0),'is-valid': !f1.name.errors }" />
+            <div *ngIf="isInValidate(f1.name,0)" class="invalid-feedback">
+                <div *ngIf="f1.name.errors.required">
+                    <p class="textP"> Nombre Requerido</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group inputWithIcon">
+            <img data-src="../../assets/icon-person.svg" class=" lazyload img-fluid">
+            <input type="text" placeholder="Apellido" formControlName="lastName" class="form-control" [(ngModel)]="register.lastName" [ngClass]="{ 'is-invalid': isInValidate(f1.lastName,0) ,'is-valid': !f1.lastName.errors }" />
+            <div *ngIf="isInValidate(f1.lastName,0)" class="invalid-feedback">
+                <div *ngIf="f1.lastName.errors.required">
+                    <p class="textP"> Apellido Requerido</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group inputWithIcon">
+            <img data-src="../../assets/icon-person.svg" class=" lazyload img-fluid">
+            <input type="text" placeholder="Nro Documento" formControlName="document" class="form-control" [(ngModel)]="register.document" [ngClass]="{ 'is-invalid': isInValidate(f1.document,0) ,'is-valid': !f1.document.errors }" />
+            <div *ngIf="isInValidate(f1.document,0)" class="invalid-feedback">
+                <div *ngIf="f1.document.errors.required">
+                    <p class="textP"> Documento Requerido</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group inputWithIcon">
+            <img data-src="../../assets/icon-phone.svg" class=" lazyload img-fluid">
+            <input type="text" placeholder="Nro Celular" formControlName="phone" class="form-control" [(ngModel)]="register.phone" [ngClass]="{ 'is-invalid': isInValidate(f1.phone,0) ,'is-valid': !f1.phone.errors }" />
+            <div *ngIf="isInValidate(f1.phone,0)" class="invalid-feedback">
+                <div *ngIf="f1.phone.errors.required">
+                    <p class="textP"> Celular Requerido </p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group inputWithIcon">
+            <input type="text" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Correo" formControlName="email" class="form-control" [(ngModel)]="register.email" [ngClass]="{ 'is-invalid':isInValidate(f1.email,0) ,'is-valid': !f1.email.errors }"
+            />
+            <img data-src="../../assets/email.svg" class=" lazyload img-fluid">
+            <div *ngIf="isInValidate(f1.email,0)" class="invalid-feedback">
+                <div *ngIf="f1.email.errors.required">
+                    <p class="textP">Correo Requido </p>
+                </div>
+                <div *ngIf="f1.email.errors.email">
+                    <p class="textP"> Ejemplo@ejemplo.com </p>
+                </div>
+            </div>
+        </div>
+        <div class="continue d-flex flex-row-reverse bd-highlight">
+            <button class="btn btn-primary">Continuar</button>
+        </div>
+    </form>
+</ng-template>

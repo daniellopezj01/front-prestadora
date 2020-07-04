@@ -83,6 +83,9 @@ export class RegisterComponent implements OnInit {
     this.registerService.loadDataFromSessionStorage()
   }
 
+  ngAfterViewInit(): void {
+    this.menu.setPosition(3)
+  }
   ngAfterContentChecked(): void {
     this.cdRef.detectChanges();
   }

@@ -5,14 +5,13 @@ import {
   ViewChild,
   ChangeDetectorRef,
 } from "@angular/core";
+import {
+  faUser, faPhoneAlt, faAddressCard
+} from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MenuBottomService } from "src/app/modules/menu/menu-bottom/menu-bottom.service";
 import { DatePipe } from "@angular/common";
-import { SharedModule } from "src/app/modules/shared/shared.module";
-import { CookieService } from "ngx-cookie-service";
-import { Router } from "@angular/router";
 import { RegisterService } from "./register.service";
-import { RestService } from "src/app/services/rest.service";
 import { SharedService } from 'src/app/modules/shared/shared.service';
 
 @Component({
@@ -21,7 +20,12 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-  tour: any = {};
+
+  /***icons */
+  faUser = faUser;
+  faPhoneAlt = faPhoneAlt;
+  faAddressCard = faAddressCard;
+
   loading = false;
   submitted: any = [];
   register: any = {};
@@ -30,9 +34,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild("datePicker") datePicker: ElementRef;
 
   formatDatePicker = false;
-  formCreditCard: boolean = true;
 
-  auxDeparture: any = "default";
   errorMessage = "";
 
   /**Forms */
@@ -46,6 +48,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild("modalError") modalError: ElementRef;
   @ViewChild("travelerBirthDay") travelerBirthDay: ElementRef;
   @ViewChild("buyerBirthDay") buyerBirthDay: ElementRef;
+
   constructor(
     private formBuilder: FormBuilder,
     private menu: MenuBottomService,
@@ -53,10 +56,9 @@ export class RegisterComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private shared: SharedService,
     public registerService: RegisterService,
-    private rest: RestService,
-    private router: Router,
-    private cookies: CookieService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.formOne = this.formBuilder.group({
@@ -79,7 +81,7 @@ export class RegisterComponent implements OnInit {
     });
     this.begin()
   }
-  begin(){
+  begin() {
     this.registerService.loadDataFromSessionStorage()
   }
 

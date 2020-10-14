@@ -53,12 +53,10 @@
     height: 1em;
 }
 
-.activation {
-}
-
 .unit {
     border-right: 0.3px solid gray;
     height: 100%;
+    cursor: pointer;
 }
 
 .remove-border {

@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  ElementRef,
   ChangeDetectorRef,
 } from "@angular/core";
 import { Router } from "@angular/router";
@@ -10,8 +8,6 @@ import { MenuBottomService } from "./menu-bottom.service";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import {
   faUserFriends,
-  faUserCog,
-  faUserTie,
   faHome,
   faCommentsDollar,
   faUserEdit,

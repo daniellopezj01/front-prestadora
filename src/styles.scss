@@ -22,7 +22,7 @@
 }
 
 .containsSuccess::after {
-    content: '';
+    content: "";
     width: 45px;
     height: 45px;
     position: absolute;
@@ -35,14 +35,14 @@
     background-image: url("./assets/success.svg");
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #ADD172;
+    background-color: #add172;
     background-size: 1.4em;
 }
 
 .titleSuccess {
     padding-top: 0.3rem;
     font-weight: bold;
-    color: #ADD172;
+    color: #add172;
     font-size: 1em;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .containsError::after {
-    content: '';
+    content: "";
     width: 45px;
     height: 45px;
     position: absolute;
@@ -87,14 +87,14 @@
     background-image: url("./assets/error.svg");
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #F16967;
+    background-color: #f16967;
     background-size: 1.1em;
 }
 
 .titleError {
     padding-top: 0.3rem;
     font-weight: bold;
-    color: #F16967;
+    color: #f16967;
     font-size: 1em;
 }
 
@@ -110,4 +110,25 @@
     background-position: center;
     background-size: 5rem;
     height: 2rem;
+}
+
+//phone
+@media print, screen and (max-width: 740px) {
+}
+
+//tablet
+@media print, screen and (max-width: 1140px) and (min-width: 740px) {
+}
+
+//desktop
+@media print, screen and (min-width: 1140px) {
+    .main-container-body {
+        padding: 0.5rem;
+        border-radius: 40px;
+        border: black solid 5px;
+        width: 25%;
+        margin: 5px auto;
+        position: relative;
+        min-height: 99vh;
+    }
 }

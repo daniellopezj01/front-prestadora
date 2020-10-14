@@ -1,23 +1,15 @@
-:host {
-    /*display: block;*/
-}
-
 .menu-show {
     transform: translateY(0px);
-    -webkit-transition: all .2s ease-out;
-    -moz-transition: all .2s ease-out;
-    -o-transition: all .2s ease-out;
-    transition: all .2s ease-out;
-    position: fixed;
+    transition: all 0.2s ease-out;
+    position: absolute;
+    width: 100%;
     bottom: 0;
+    left: 0;
     z-index: 9;
 }
 
 .hidden-menu {
-    -webkit-transition: all .2s ease-out;
-    -moz-transition: all .2s ease-out;
-    -o-transition: all .2s ease-out;
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
     transform: translateY(70px) !important;
 }
 
@@ -36,9 +28,8 @@
     flex: none;
 }
 
-.body {
-    padding-top: 1.5vh;
-    width: 100vw;
+.body-menu {
+    width: 100%;
     margin: 0;
     display: flex;
     background-color: white;
@@ -47,6 +38,7 @@
     font-weight: 500;
     font-style: normal;
     font-size: 0.75em;
+    border-radius: 10px;
 }
 
 .spanContainer {
@@ -61,11 +53,10 @@
     height: 1em;
 }
 
-.activation {}
-
 .unit {
     border-right: 0.3px solid gray;
     height: 100%;
+    cursor: pointer;
 }
 
 .remove-border {
@@ -74,7 +65,7 @@
 
 .span-menu {
     display: grid;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
 }
 
 .icon-style {

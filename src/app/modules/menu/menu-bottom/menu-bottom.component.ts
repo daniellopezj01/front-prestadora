@@ -1,17 +1,12 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  ElementRef,
   ChangeDetectorRef,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { MenuBottomService } from "./menu-bottom.service";
-import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import {
   faUserFriends,
-  faUserCog,
-  faUserTie,
   faHome,
   faCommentsDollar,
   faUserEdit,
@@ -22,32 +17,28 @@ import {
   templateUrl: "./menu-bottom.component.html",
   styleUrls: ["./menu-bottom.component.css"],
 })
+
 export class MenuBottomComponent implements OnInit {
   message: string;
   actual: number = 0;
-  faUserFriends = faUserFriends;
-  faHome = faHome;
-  faCommentsDollar = faCommentsDollar;
-  faUserEdit = faUserEdit;
-  faUser = faUser;
+
+  actions = [
+    { icon: faHome, text: 'Inicio' },
+    { icon: faCommentsDollar, text: 'Finanzas' },
+    { icon: faUserFriends, text: 'Clientes' },
+    { icon: faUserEdit, text: 'Registrar' },
+    { icon: faUser, text: 'Perfil' },
+  ]
 
   addButton: string = "../../../../../assets/buttonMenu/addButton.svg";
   constructor(
     private router: Router,
     public menu: MenuBottomService,
     private cdRef: ChangeDetectorRef,
-    private library: FaIconLibrary
   ) {
-    library.addIcons(
-      faUserFriends,
-      faCommentsDollar,
-      faUserEdit,
-      faHome,
-      faUser
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 
   ngAfterViewChecked(): void {

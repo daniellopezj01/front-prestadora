@@ -15,6 +15,7 @@ export class MenuBottomService {
   setPosition(position) {
     this.position = position;
   }
+  
   getPosition() {
     return this.position;
   }

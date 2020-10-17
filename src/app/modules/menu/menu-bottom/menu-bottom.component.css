@@ -1,11 +1,10 @@
 .menu-show {
     transform: translateY(0px);
     transition: all 0.2s ease-out;
-    position: absolute;
     width: 100%;
-    bottom: 0;
-    left: 0;
+    background-color: white;
     z-index: 9;
+    max-height: 4rem;
 }
 
 .hidden-menu {
@@ -13,44 +12,13 @@
     transform: translateY(70px) !important;
 }
 
-.img_menu {
-    width: 6.5vw;
-    height: 2.95vh;
-}
-
-.addButton {
-    padding: 0;
-    bottom: 1.84vh;
-}
-
 .width_max {
     max-width: 20%;
     flex: none;
 }
 
-.body-menu {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    background-color: white;
-    color: #8e8e93;
-    font-family: Roboto;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 0.75em;
-    border-radius: 10px;
-}
-
 .spanContainer {
     position: relative;
-}
-
-#searchSimbol {
-    position: absolute;
-    left: 0.8rem;
-    top: 0.8rem;
-    width: 1em;
-    height: 1em;
 }
 
 .unit {
@@ -59,8 +27,9 @@
     cursor: pointer;
 }
 
-.remove-border {
-    border-right: 0px !important;
+.last-item{
+    
+    border-right: none !important;
 }
 
 .span-menu {
@@ -75,4 +44,19 @@
 p {
     margin: 0;
     outline: 0;
+}
+
+
+@media print, screen and (max-width: 740px) {
+}
+
+@media print, screen and (max-width: 1140px) and (min-width: 740px) {
+}
+
+@media print, screen and (min-width: 1140px) {
+    .menu-show {
+       border-radius: 50px;
+        
+    }
+    
 }

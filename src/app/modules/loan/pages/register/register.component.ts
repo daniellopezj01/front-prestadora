@@ -6,7 +6,7 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import {
-  faUser, faPhoneAlt, faAddressCard
+  faUser, faPhoneAlt, faAddressCard, faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MenuBottomService } from "src/app/modules/menu/menu-bottom/menu-bottom.service";
@@ -20,11 +20,12 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-
+activeIcon =''
   /***icons */
   faUser = faUser;
   faPhoneAlt = faPhoneAlt;
   faAddressCard = faAddressCard;
+  faEnvelope = faEnvelope;
 
   loading = false;
   submitted: any = [];
@@ -186,4 +187,10 @@ export class RegisterComponent implements OnInit {
     this.disabledButton = false;
   }
 
+
+  cleanIcon(){
+    this.activeIcon = '';
+  }
+
+  checkIcon=(key)=> this.activeIcon === key;
 }

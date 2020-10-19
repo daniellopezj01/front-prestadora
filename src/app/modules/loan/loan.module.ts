@@ -6,6 +6,7 @@ import { BalanceComponent } from './pages/balance/balance.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [BalanceComponent, RegisterComponent],
@@ -14,7 +15,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoanRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [DatePipe],
 })

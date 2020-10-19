@@ -1,4 +1,8 @@
 
+.main-container-body{
+  background-color: white;
+}
+
 //phone
 @media print, screen and (max-width: 740px) {
 }
@@ -11,6 +15,7 @@
 @media print, screen and (min-width: 1140px) {
   .main-container-body {
     padding: 0.5rem;
+    
     border-radius: 40px;
     border: black solid 5px;
     width: 25%;

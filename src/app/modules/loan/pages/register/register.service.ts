@@ -1,36 +1,35 @@
 import { Injectable } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
-
+import * as _ from 'lodash'
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  MANAGER_STEP_ONE = "one";
-  MANAGER_STEP_TWO = "two";
-  MANAGER_STEP_THREE = "three";
+  REGISTER_COOKIES = "register";
+  STEP_COOKIES = "Step";
 
   public active: number = 0;
   public register: any = {};
   public user: any;
   public navigate: any = [];
-  public numberItemsNavigation = 5;
+  public numberItemsNavigation = 4;
   public showInfo: boolean = false;
 
-  constructor(
-    private rest: RestService,
-  ) {
+
+  constructor(private rest: RestService, private cookies: CookieService) {
     for (var i = 0; i < this.numberItemsNavigation; i++) {
-      i === 0 ? (this.navigate[i] = true) : (this.navigate[i] = false);
+      this.navigate[i] = (i === 0) ? true : false;
     }
     this.showInfo = false;
-
+    this.loadDataFromSessionStorage()
   }
 
   /**
    * GETTER AND SETTER
    */
 
-  getActive(): any {
+  getActive(): number {
     return this.active;
   }
 
@@ -74,74 +73,28 @@ export class RegisterService {
    */
 
   public loadDataFromSessionStorage() {
-    if (sessionStorage.getItem(this.MANAGER_STEP_ONE)) {
-      this.loadDataFromStorageOne();
-      if (sessionStorage.getItem(this.MANAGER_STEP_TWO)) {
-        this.loadDataFromStoragetwo();
-        if (sessionStorage.getItem(this.MANAGER_STEP_THREE)) {
-          this.loadDataFromStoragethree();
-        }
-      }
-    } 
-    this.show();
-    
-  }
-
-  limitDesabledButton(limitPosition: number) {
-    for (var i = 0; i < this.navigate.length; i++) {
-      i < limitPosition
-        ? (this.navigate[i] = false)
-        : (this.navigate[i] = true);
+    if (this.cookies.check(this.REGISTER_COOKIES)) {
+      this.register = JSON.parse(this.cookies.get(this.REGISTER_COOKIES))
     }
+    if (this.cookies.check(this.STEP_COOKIES)) {
+      this.active = Number.parseInt(this.cookies.get(this.STEP_COOKIES))
+      this.limitEnabledButton(this.active)
+    }
+    this.show();
   }
 
   limitEnabledButton(limitPosition: number) {
     for (var i = 0; i < this.navigate.length; i++) {
-      i <= limitPosition
-        ? (this.navigate[i] = true)
-        : (this.navigate[i] = false);
+      this.navigate[i] = i <= limitPosition ? true : false;
     }
-  }
-
-  loadDataFromStorageOne() {
-    let one = JSON.parse(sessionStorage.getItem(this.MANAGER_STEP_ONE));
-    this.register = { ...this.register, ...one };
-    this.activeFormAndButton(1);
-  }
-
-  loadDataFromStoragetwo() {
-    let two = JSON.parse(sessionStorage.getItem(this.MANAGER_STEP_TWO));
-    this.register = { ...this.register, ...two };
-    this.activeFormAndButton(2);
-  }
-
-  loadDataFromStoragethree() {
-    let three = JSON.parse(sessionStorage.getItem(this.MANAGER_STEP_THREE));
-    this.register = { ...this.register, ...three };
-    this.activeFormAndButton(3);
   }
 
   enableForm(positionInArray: number) {
     this.navigate[positionInArray] = true;
   }
 
-  saveOne() {
-    // let {
-    //   travelerBirthDay,
-    //   country,
-    //   travelerAddres,
-    //   travelerGender,
-    // } = this.register;
-    // sessionStorage.setItem(
-    //   this.MANAGER_STEP_TWO,
-    //   JSON.stringify({
-    //     travelerBirthDay,
-    //     country,
-    //     travelerAddres,
-    //     travelerGender,
-    //   })
-    // );
+  setStorage(register) {
+    this.cookies.set(this.REGISTER_COOKIES, JSON.stringify(register))
+    this.cookies.set(this.STEP_COOKIES, `${this.getActive()}`)
   }
-
-
 }

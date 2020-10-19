@@ -4,15 +4,14 @@
         <div class="title-logo d-flex justify-content-center">
             <p>Multiservicios Hillary</p>
         </div>
-
     </div>
 
     <div class="col-12 " id="containerForm">
         <div id="managerForm">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group inputWithIcon">
-                    <fa-icon class="icon-style lazyload" [icon]="faEnvelope"></fa-icon>
-                    <input id="username" type="text" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <fa-icon class="icon-style lazyload" [icon]="faEnvelope" [ngStyle]="{'color': checkIcon('email')?'#1C7EE0':'gray'}"></fa-icon>
+                    <input id="username" type="text"  (focus)="activeIcon='email'" (blur)="cleanIcon()" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">
                             <p class="textP">Correo requerido</p>
@@ -23,8 +22,8 @@
                     </div>
                 </div>
                 <div class="form-group inputWithIcon">
-                    <fa-icon class="icon-style lazyload" [icon]="faUnlockAlt"></fa-icon>
-                    <input type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <fa-icon class="icon-style lazyload" [icon]="faUnlockAlt"  [ngStyle]="{'color': checkIcon('password')?'#1C7EE0':'gray'}"></fa-icon>
+                    <input type="password" placeholder="Password" (focus)="activeIcon='password'" (blur)="cleanIcon()" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
 
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">

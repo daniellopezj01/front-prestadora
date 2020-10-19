@@ -1,6 +1,6 @@
 <div [ngClass]="{'hidden-menu':(!menu.visible)}" class="menu-show">
   <div class=" justify-content-center align-items-center body d-flex " id="menu">
-    <div *ngFor="let item of actions; let i=index" (click)="action(i)" class="unit w-20 text-center width_max">
+    <div *ngFor="let item of actions; let i=index" (click)="action(i)" class="unit w-20 text-center width_max" [ngClass]="{'last-item': item.text==='Perfil'}">
       <span class="span-menu">
         <fa-icon class="icon-style" [ngStyle]="{'color': (actual ===i)?'#1C7EE0':'gray'}" [icon]="item?.icon"></fa-icon>
         <p [ngStyle]="{'color': (actual ===i)?'#1C7EE0':'gray'}"> {{item?.text}} </p>

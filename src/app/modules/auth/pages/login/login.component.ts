@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   item: any;
   loading = false;
+  activeIcon = ''
 
   @ViewChild("buttonLogin") buttonLogin: ElementRef;
 
@@ -124,4 +125,10 @@ export class LoginComponent implements OnInit {
   sendToForget() {
     this.router.navigate(["/auth/forget"]);
   }
+
+  cleanIcon() {
+    this.activeIcon = '';
+  }
+
+  checkIcon = (key) => this.activeIcon === key;
 }

@@ -111,8 +111,13 @@ select {
     box-shadow: 10px 10px 32px -15px rgba(0, 0, 0, 0.21);
 }
 
+.continue {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
 .continue button {
-    width: 35%;
+    width: 50%;
     height: 2.8rem;
     background: #3277d8;
     box-shadow: 0px 5px 20px rgba(125, 138, 159, 0.1);
@@ -121,7 +126,7 @@ select {
     color: #ffffff;
 }
 
-.inputWithIcon input[type="text"] {
+.inputWithIcon input {
     padding-left: 3rem;
 }
 

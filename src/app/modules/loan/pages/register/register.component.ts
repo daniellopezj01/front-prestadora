@@ -6,13 +6,12 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import {
-  faUser, faPhoneAlt, faAddressCard
+  faUser, faPhoneAlt, faAddressCard, faEnvelope, faMapMarkedAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MenuBottomService } from "src/app/modules/menu/menu-bottom/menu-bottom.service";
 import { DatePipe } from "@angular/common";
 import { RegisterService } from "./register.service";
-import { SharedService } from 'src/app/modules/shared/shared.service';
 
 @Component({
   selector: "app-register",
@@ -20,45 +19,37 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-
+  activeIcon = ''
   /***icons */
   faUser = faUser;
   faPhoneAlt = faPhoneAlt;
   faAddressCard = faAddressCard;
+  faEnvelope = faEnvelope;
+  faMapMarkedAlt = faMapMarkedAlt;
 
   loading = false;
   submitted: any = [];
   register: any = {};
-  directiveButton = false;
+  today = new Date()
   disabledButton = false;
   @ViewChild("datePicker") datePicker: ElementRef;
-
-  formatDatePicker = false;
-
-  errorMessage = "";
 
   /**Forms */
   formOne: FormGroup;
   formTwo: FormGroup;
   formThree: FormGroup;
   formFour: FormGroup;
-  formPay: FormGroup;
 
   public data: any = false;
-  @ViewChild("modalError") modalError: ElementRef;
   @ViewChild("travelerBirthDay") travelerBirthDay: ElementRef;
-  @ViewChild("buyerBirthDay") buyerBirthDay: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
     private menu: MenuBottomService,
     private datePipe: DatePipe,
     private cdRef: ChangeDetectorRef,
-    private shared: SharedService,
     public registerService: RegisterService,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     this.formOne = this.formBuilder.group({
@@ -66,13 +57,16 @@ export class RegisterComponent implements OnInit {
       lastName: ["", Validators.required],
       document: ["", [Validators.required]],
       phone: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
       address: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
     });
     this.formTwo = this.formBuilder.group({
       amount: ["", Validators.required],
-      interes: ["", Validators.required],
-      beginDay: ["", [Validators.required]],
+      interest: ["", Validators.required],
+      beginDate: ["", [Validators.required]],
+      range: ["", Validators.required],
+      addressJob: ["", Validators.required],
+      sectional: ["", Validators.required],
     });
     this.formThree = this.formBuilder.group({
       jobRank: ["", Validators.required],
@@ -81,13 +75,15 @@ export class RegisterComponent implements OnInit {
     });
     this.begin()
   }
+
   begin() {
-    this.registerService.loadDataFromSessionStorage()
+    this.register = this.registerService.getregister()
   }
 
   ngAfterViewInit(): void {
     this.menu.setPosition(3)
   }
+
   ngAfterContentChecked(): void {
     this.cdRef.detectChanges();
   }
@@ -106,84 +102,42 @@ export class RegisterComponent implements OnInit {
     return this.formFour.controls;
   }
 
-  activeForms() {
-    this.loading = true;
-    switch (this.registerService.getActive()) {
-      case 0:
-        this.validateOne();
-        break;
-      case 1:
-        // this.validateTwo();
-        break;
-      case 2:
-        // this.validateThree();
-        break;
-      case 3:
-        // this.validateFour();
-        break;
-      default:
-        break;
+  validateForms(form: FormGroup) {
+    const active = this.registerService.getActive()
+    this.submitted[active] = true;
+    if (form.invalid) {
+      this.loading = false;
+      return;
     }
-  }
-
-  typeaheadOnBlur(event: any): void {
-    this.register.country = event.item;
+    this.nextStep(active + 1, this.register);
   }
 
   isInValidate(control: any, position: number) {
     return (
       (!control.pristine && control.errors) ||
       (this.submitted[position] && control.errors)
-    );
-  }
-
-  validateOne() {
-    this.submitted[0] = true;
-    if (this.formOne.invalid) {
-      this.loading = false;
-      return;
-    }
-    this.nextStep(1, this.register);
-    this.registerService.saveOne();
-  }
-
-  changeFormatDate(date) {
-    return this.datePipe.transform(date, "MM-dd-yyyy");
+    )
   }
 
   nextStep(itemActive: number, register: any) {
     this.registerService.setRegister(register);
     this.registerService.setActive(itemActive);
     this.registerService.activeNavigation(itemActive);
-  }
-
-  changeDatapicker(value: Date, text, control) {
-    let dataPickert = this.changeFormatDate(value);
-    let today = this.changeFormatDate(new Date());
-    if (dataPickert > today) {
-      control.setValue("");
-      if (text === "travelerBirthDay") {
-        this.travelerBirthDay.nativeElement.value = null;
-      } else {
-        this.buyerBirthDay.nativeElement.value = null;
-      }
-      this.register[`${text}`] = "";
-      this.shared.showError("GENERAL.UPS", "EDIT_PROFILE.DATE_INVALID");
-    }
+    this.registerService.setStorage(this.register)
   }
 
   goToSection(number) {
     this.registerService.setActive(number);
-    this.registerService.limitEnabledButton(number);
   }
 
-  disabledPayButton() {
-    this.directiveButton = true;
-    this.disabledButton = true;
-  }
-  enabledPayButton() {
-    this.directiveButton = false;
-    this.disabledButton = false;
+  changeDatapicker(event) {
+    console.log(event)
+
   }
 
+  cleanIcon() {
+    this.activeIcon = '';
+  }
+
+  checkIcon = (key) => this.activeIcon === key;
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: `http://localhost:3000`,
+  api: `http://192.168.1.107:3000`,
   serverSocket: 'http://1localhost:3000',
   daysTokenExpire: 4
 };

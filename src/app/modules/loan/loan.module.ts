@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [BalanceComponent, RegisterComponent],
@@ -17,6 +18,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     FormsModule,
     FontAwesomeModule,
     BsDatepickerModule.forRoot(),
+    NgxMaskModule.forRoot(),
   ],
   providers: [DatePipe],
 })

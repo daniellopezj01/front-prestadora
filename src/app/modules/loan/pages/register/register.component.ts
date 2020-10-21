@@ -6,12 +6,15 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import {
-  faUser, faPhoneAlt, faAddressCard, faEnvelope, faMapMarkedAlt
+  faUser, faPhoneAlt, faNetworkWired,faAddressCard, faEnvelope,faCodeBranch, faMoneyBillAlt,faDollarSign, faCalendarAlt,faBuilding
 } from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MenuBottomService } from "src/app/modules/menu/menu-bottom/menu-bottom.service";
 import { DatePipe } from "@angular/common";
 import { RegisterService } from "./register.service";
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { esLocale } from 'ngx-bootstrap/locale';
+import { defineLocale } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: "app-register",
@@ -25,14 +28,19 @@ export class RegisterComponent implements OnInit {
   faPhoneAlt = faPhoneAlt;
   faAddressCard = faAddressCard;
   faEnvelope = faEnvelope;
-  faMapMarkedAlt = faMapMarkedAlt;
+  faMoneyBillAlt = faMoneyBillAlt;
+  faDollarSign = faDollarSign;
+  faBuilding = faBuilding;
+  faCalendarAlt = faCalendarAlt;
+  faNetworkWired = faNetworkWired;
+  faCodeBranch = faCodeBranch;
 
   loading = false;
   submitted: any = [];
   register: any = {};
   today = new Date()
   disabledButton = false;
-  @ViewChild("datePicker") datePicker: ElementRef;
+  @ViewChild("dp") dp: any;
 
   /**Forms */
   formOne: FormGroup;
@@ -49,6 +57,7 @@ export class RegisterComponent implements OnInit {
     private datePipe: DatePipe,
     private cdRef: ChangeDetectorRef,
     public registerService: RegisterService,
+    private localeService: BsLocaleService
   ) { }
 
   ngOnInit(): void {
@@ -75,13 +84,17 @@ export class RegisterComponent implements OnInit {
     });
     this.begin()
   }
-
+  
   begin() {
     this.register = this.registerService.getregister()
   }
-
+  
   ngAfterViewInit(): void {
     this.menu.setPosition(3)
+    defineLocale('es', esLocale);
+    this.localeService.use('es');
+    // this.dp.hide();
+    // this.dp.show();
   }
 
   ngAfterContentChecked(): void {
@@ -132,7 +145,6 @@ export class RegisterComponent implements OnInit {
 
   changeDatapicker(event) {
     console.log(event)
-
   }
 
   cleanIcon() {

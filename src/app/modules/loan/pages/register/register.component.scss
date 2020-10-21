@@ -26,12 +26,14 @@
 }
 
 .buttons button:disabled {
-    background: #8db5ee;
+    background: #AFCEF9;
+    // background: #8db5ee;
     opacity: 1;
 }
 
-.btn-primary {
-    border-color: #8db5ee;
+.customButton {
+    color: white;
+    background-color: #5085EE;
 }
 
 p {
@@ -111,6 +113,10 @@ select {
     box-shadow: 10px 10px 32px -15px rgba(0, 0, 0, 0.21);
 }
 
+button:focus {
+    outline: none;
+}
+
 .continue {
     display: flex;
     justify-content: center;
@@ -178,6 +184,12 @@ input:read-only {
 p {
     outline: none;
     margin: 0;
+}
+
+.activeButton{
+    // border:  2px solid #192E6D;
+    // background-color: #27D09D;
+    background-color: #154fa1;
 }
 
 //desktop

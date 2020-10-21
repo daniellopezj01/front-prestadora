@@ -9,8 +9,9 @@
                 <div class="line"></div>
                 <div class="navigation d-flex">
                     <div class="buttons" *ngFor="let item of registerService.navigate; let i=index">
-                        <button [disabled]="!registerService.navigate[i]" (click)="goToSection(i)"
-                            class="btn btn-primary">{{i+1}}</button>
+                        <button [disabled]="!registerService.navigate[i]"
+                            [ngClass]="{'activeButton': registerService.active=== i}" (click)="goToSection(i)"
+                            class="btn customButton">{{i+1}}</button>
                     </div>
                 </div>
             </div>
@@ -84,7 +85,7 @@
             </div>
         </div>
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faMapMarkedAlt" [ngStyle]="{'color': checkIcon('address')?'#1C7EE0':'gray'}">
+            <fa-icon class="icons" [icon]="faBuilding" [ngStyle]="{'color': checkIcon('address')?'#1C7EE0':'gray'}">
             </fa-icon>
             <input type="text" placeholder="Direccion" formControlName="address" class="form-control"
                 (focus)="activeIcon='address'" (blur)="cleanIcon()" [(ngModel)]="register.address"
@@ -102,14 +103,14 @@
                 (focus)="activeIcon='email'" (blur)="cleanIcon()" formControlName="email" class="form-control"
                 [(ngModel)]="register.email"
                 [ngClass]="{ 'is-invalid':isInValidate(f1.email,0) ,'is-valid': !f1.email.errors }" />
-            <!-- <div *ngIf="isInValidate(f1.email,0)" class="invalid-feedback">
+            <div *ngIf="isInValidate(f1.email,0)" class="invalid-feedback">
                 <div *ngIf="f1.email.errors.required">
                     <p class="textP">Correo Requido </p>
                 </div>
                 <div *ngIf="f1.email.errors.email">
                     <p class="textP"> Ejemplo@ejemplo.com </p>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="continue">
             <button class="btn btn-primary">Continuar</button>
@@ -122,10 +123,11 @@
     </div>
     <form [formGroup]="formTwo" (ngSubmit)="validateForms(formTwo)">
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faUser" [ngStyle]="{'color': checkIcon('amount')?'#1C7EE0':'gray'}">
+            <fa-icon class="icons" [icon]="faDollarSign" [ngStyle]="{'color': checkIcon('amount')?'#1C7EE0':'gray'}">
             </fa-icon>
-            <input type="text" placeholder="Valor" formControlName="amount" (focus)="activeIcon='amount'"
-                (blur)="cleanIcon()" class="form-control" [(ngModel)]="register.amount"
+            <input type="text" mask="separator.2" thousandSeparator="." separatorLimit="10000000" placeholder="Valor"
+                formControlName="amount" (focus)="activeIcon='amount'" (blur)="cleanIcon()" class="form-control"
+                [(ngModel)]="register.amount"
                 [ngClass]="{ 'is-invalid':isInValidate(f2.amount,1),'is-valid': !f2.amount.errors }" />
             <div *ngIf="isInValidate(f2.amount,1)" class="invalid-feedback">
                 <div *ngIf="f2.amount.errors.required">
@@ -134,10 +136,12 @@
             </div>
         </div>
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faUser" [ngStyle]="{'color':  checkIcon('interest')?'#1C7EE0':'gray'}">
+            <fa-icon class="icons" [icon]="faMoneyBillAlt"
+                [ngStyle]="{'color':  checkIcon('interest')?'#1C7EE0':'gray'}">
             </fa-icon>
-            <input type="text" placeholder="Interes" formControlName="interest" class="form-control"
-                (focus)="activeIcon='interest'" (blur)="cleanIcon()" [(ngModel)]="register.interest"
+            <input type="text" mask="separator.0" separatorLimit="10" placeholder="Interes %" formControlName="interest"
+                class="form-control" (focus)="activeIcon='interest'" (blur)="cleanIcon()"
+                [(ngModel)]="register.interest"
                 [ngClass]="{ 'is-invalid': isInValidate(f2.interest,1) ,'is-valid': !f2.interest.errors }" />
             <div *ngIf="isInValidate(f2.interest,1)" class="invalid-feedback">
                 <div *ngIf="f2.interest.errors.required">
@@ -146,51 +150,51 @@
             </div>
         </div>
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faAddressCard" [ngStyle]="{'color': checkIcon('date')?'#1C7EE0':'gray'}">
+            <fa-icon class="icons" [icon]="faCalendarAlt" [ngStyle]="{'color': checkIcon('date')?'#1C7EE0':'gray'}">
             </fa-icon>
-            <input  bsDatepicker readonly  (focus)="activeIcon='date'" (blur)="cleanIcon()"
+            <input #dp="bsDatepicker" bsDatepicker readonly (focus)="activeIcon='date'" (blur)="cleanIcon()"
                 formControlName="beginDate" class="form-control" (bsValueChange)="changeDatapicker($event)"
-                [maxDate]="today"[(ngModel)]="register.beginDate"
-                [bsConfig]="{ showWeekNumbers:false , isAnimated: true,rangeInputFormat : 'DD-MMM-YYYY' , containerClass: 'theme-red'}"
-             class="input-checkIn" placeholder="CheckIn">
+                [maxDate]="today" [(ngModel)]="register.beginDate"
+                [bsConfig]="{ showWeekNumbers:false , isAnimated: true,dateInputFormat : 'DD-MMMM-YYYY', containerClass: 'theme-red'}"
+                class="input-checkIn" placeholder="Fecha de Inicio">
         </div>
 
         <div class="title-form">
             <p>Informacion laboral</p>
         </div>
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faPhoneAlt" [ngStyle]="{'color': checkIcon('range')?'#1C7EE0':'gray'}">
+            <fa-icon class="icons" [icon]="faNetworkWired" [ngStyle]="{'color': checkIcon('range')?'#1C7EE0':'gray'}">
             </fa-icon>
             <input type="text" placeholder="Rango" formControlName="range" class="form-control"
                 (focus)="activeIcon='range'" (blur)="cleanIcon()" [(ngModel)]="register.range"
                 [ngClass]="{ 'is-invalid': isInValidate(f2.range,1) ,'is-valid': !f2.range.errors }" />
             <div *ngIf="isInValidate(f2.range,1)" class="invalid-feedback">
                 <div *ngIf="f2.range.errors.required">
-                    <p class="textP"> Celular Requerido </p>
+                    <p class="textP"> Rango laboral Requerida </p>
                 </div>
             </div>
         </div>
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faMapMarkedAlt"
+            <fa-icon class="icons" [icon]="faBuilding"
                 [ngStyle]="{'color': checkIcon('addressJob')?'#1C7EE0':'gray'}"></fa-icon>
             <input type="text" placeholder="Direccion" formControlName="addressJob" class="form-control"
                 (focus)="activeIcon='addressJob'" (blur)="cleanIcon()" [(ngModel)]="register.addressJob"
                 [ngClass]="{ 'is-invalid': isInValidate(f2.addressJob,1) ,'is-valid': !f2.addressJob.errors }" />
             <div *ngIf="isInValidate(f2.addressJob,1)" class="invalid-feedback">
                 <div *ngIf="f2.addressJob.errors.required">
-                    <p class="textP"> Celular Requerido </p>
+                    <p class="textP"> Direccion Laboral Requerida </p>
                 </div>
             </div>
         </div>
         <div class="form-group inputWithIcon">
-            <fa-icon class="icons" [icon]="faMapMarkedAlt"
+            <fa-icon class="icons" [icon]="faCodeBranch"
                 [ngStyle]="{'color': checkIcon('sectional')?'#1C7EE0':'gray'}"></fa-icon>
             <input type="text" placeholder="Seccional" formControlName="sectional" class="form-control"
                 (focus)="activeIcon='sectional'" (blur)="cleanIcon()" [(ngModel)]="register.sectional"
                 [ngClass]="{ 'is-invalid': isInValidate(f2.sectional,1) ,'is-valid': !f2.sectional.errors }" />
             <div *ngIf="isInValidate(f2.sectional,1)" class="invalid-feedback">
                 <div *ngIf="f2.sectional.errors.required">
-                    <p class="textP"> Celular Requerido </p>
+                    <p class="textP"> Seccional Laboral Requerida </p>
                 </div>
             </div>
         </div>
